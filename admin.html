@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - DARKX Games</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-dark">
+    <!-- Admin Login -->
+    <div id="adminLogin" class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card bg-dark text-light shadow-lg" style="width: 400px; border: 2px solid var(--warning);">
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <i class="fas fa-user-shield fa-3x text-warning mb-3"></i>
+                    <h2 class="text-warning">ADMIN PANEL</h2>
+                    <p class="text-muted">DARKX Games Management</p>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="adminPassword" class="form-label">
+                        <i class="fas fa-key me-2"></i>Admin Password
+                    </label>
+                    <input type="password" class="form-control" id="adminPassword" 
+                           placeholder="Enter DARKX2025">
+                    <div class="form-text text-muted">
+                        Password: DARKX2025
+                    </div>
+                </div>
+                
+                <button id="adminLoginBtn" class="btn btn-warning w-100 mb-3">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                </button>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    This panel is for adding/editing games only.
+                </div>
+                
+                <div class="text-center">
+                    <a href="index.html" class="text-light text-decoration-none">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Main Site
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel (Hidden until login) -->
+    <div id="adminPanel" class="d-none">
+        <!-- Admin Navbar -->
+        <nav class="navbar navbar-dark bg-dark border-bottom border-warning">
+            <div class="container">
+                <span class="navbar-brand text-warning">
+                    <i class="fas fa-user-shield me-2"></i>
+                    Admin Panel
+                </span>
+                <div>
+                    <button id="logoutBtn" class="btn btn-outline-warning btn-sm">
+                        <i class="fas fa-sign-out-alt me-1"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid py-4">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3 col-lg-2">
+                    <div class="card bg-dark border-warning mb-4">
+                        <div class="card-body">
+                            <h5 class="text-warning">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link text-light active" href="#addGame">
+                                        <i class="fas fa-plus-circle me-2"></i>Add Game
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#manageGames">
+                                        <i class="fas fa-cog me-2"></i>Manage Games
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="index.html" target="_blank">
+                                        <i class="fas fa-external-link-alt me-2"></i>View Site
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-dark border-warning">
+                        <div class="card-body">
+                            <h6 class="text-light">
+                                <i class="fas fa-info-circle me-2"></i>Quick Stats
+                            </h6>
+                            <div id="statsContainer" class="text-center">
+                                <!-- Stats will load here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-md-9 col-lg-10">
+                    <!-- Add Game Form -->
+                    <div id="addGame" class="card bg-dark border-warning mb-4">
+                        <div class="card-header bg-dark text-warning">
+                            <h4 class="mb-0">
+                                <i class="fas fa-plus-circle me-2"></i>Add New Game
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="addGameForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light">Game Title *</label>
+                                        <input type="text" class="form-control" id="gameTitle" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light">Category</label>
+                                        <select class="form-select" id="gameCategory">
+                                            <option value="Action">Action</option>
+                                            <option value="Adventure">Adventure</option>
+                                            <option value="RPG">RPG</option>
+                                            <option value="Sports">Sports</option>
+                                            <option value="Racing">Racing</option>
+                                            <option value="Strategy">Strategy</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light">Download Link *</label>
+                                        <input type="url" class="form-control" id="downloadLink" required 
+                                               placeholder="https://drive.google.com/...">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light">Platform</label>
+                                        <select class="form-select" id="platform">
+                                            <option value="Android">Android</option>
+                                            <option value="PC">PC</option>
+                                            <option value="iOS">iOS</option>
+                                            <option value="Multi-platform">Multi-platform</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light">File Size *</label>
+                                        <input type="text" class="form-control" id="fileSize" required 
+                                               placeholder="e.g., 250 MB, 1.2 GB">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light">Thumbnail URL</label>
+                                        <input type="url" class="form-control" id="thumbnail" 
+                                               placeholder="https://images.unsplash.com/...">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label text-light">Description *</label>
+                                    <textarea class="form-control" id="description" rows="4" required></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="isFeatured">
+                                        <label class="form-check-label text-light">
+                                            Mark as Featured Game
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-save me-2"></i>Add Game
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Manage Games -->
+                    <div id="manageGames" class="card bg-dark border-warning">
+                        <div class="card-header bg-dark text-warning">
+                            <h4 class="mb-0">
+                                <i class="fas fa-cog me-2"></i>Manage Games
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-dark table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Downloads</th>
+                                            <th>Date Added</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="gamesTable">
+                                        <!-- Games will load here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
