@@ -1,0 +1,12 @@
+{
+  "name": "Gamesdark",
+  "description": "DarkX Games downloading site",
+  "repository": "https://github.com/darkxxweb-debug/Gamesdark",
+  "logo": "",
+  "keywords": ["games", "darkx"],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
